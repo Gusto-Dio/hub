@@ -118,4 +118,4 @@
 - [BT-76855 Advising_UHC_PacketCollection Object reference](project_bt76855_advising_uhc_packetcollection_object_reference.md) — TICKET FECHADO ✅ (21/10); PR #3452 mergeada, v1.17.16 live em Prod (rebind feito), sem E2E
 - [BT-76973 BCBS_MA pop-up bloqueado fecha o Chrome](project_bt76973_bcbs_ma_popup_blocked_chrome_closed.md) — causa: Close Tab incondicional em NavigateToHome; Dio liberou pop-up, filas zeradas (22/10 01:50 UTC), Jira comentado; falta rodada 06:00 + política/lib
 - [uip queue-items: sem retry, delete exige --yes](reference_uip_queue_items_cli_gotchas.md) — recolocar item com SpecificData bruto; auto mode bloqueia delete em Prod (Dio roda via !)
-- [Migração VDI → VM AWS + hub (27/10)](project_vm_migration_hub_2026_10.md) — VM: Claude+Python+PATH+clones ok; pendente: confirmar pip/git identity, copiar CLAUDE.md, restore-memory, uip, MCPs, TI share
+- [Migração VDI → VM AWS + hub (27/10)](project_vm_migration_hub_2026_10.md) — memória restaurada e verificada na VM (BT-77065 ok); falta confirmar uip login, MCPs, TI share (Z:), Chrome

@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 6bc790a4-5e22-4ad1-8185-2c04a80fb223
-  modified: 2026-10-27T20:59:43.863Z
+  modified: 2026-10-27T21:06:31.861Z
 ---
 
 Dio está saindo da Porto VDI para uma VM AWS e quer levar o conhecimento do Claude junto.
@@ -15,7 +15,8 @@ Dio está saindo da Porto VDI para uma VM AWS e quer levar o conhecimento do Cla
 **Progresso na VM nova (usuário diogenes.ribeiro, em outra tela) — atualizado 27/10 após o push do hub (commit 08dc92a):**
 - FEITO e verificado em PowerShell novo: git 2.54.0, node 24.21.0, dotnet 8.0.421, Claude Code 2.1.311 (npm com `--allow-scripts=@anthropic-ai/claude-code`), Python 3.14.7 (`winget install --id Python.Python.3.14 --source winget`; só funcionou como Administrador, erro 1625 sem admin; instala por usuário em `%LOCALAPPDATA%\Programs\Python\Python314`). PATH do usuário já inclui Python, Scripts e `%APPDATA%\npm` (usar GetEnvironmentVariable("Path","User"), nunca `$env:Path`).
 - FEITO também (27/10, saída colada pelo Dio): clones em `C:\Projects\hub` (commit 08dc92a, sem o c8e6ced ainda não pushado na VDI → `git pull` depois do push) e `C:\Projects\biztech-uipath-rpa` (3933 arquivos); o clone do hub pediu autenticação no navegador e funcionou.
-- NÃO CONFIRMADO pelo Dio (passei os comandos, ele não reportou): `pip install pillow boto3` e `git config --global user.name/email` — checar com `python -m pip list` e `git config --global --list`.
+- VERIFICADO (27/10 ~21:05): Dio executou todos os passos (pull, CLAUDE.md global, restore-memory, claude no repo); o Claude da VM respondeu sobre BT-77065 com os detalhes corretos (lib 1.559.45, processo 7.0.14, PRs #3594/#3595, rollback, retry do deploy) → memória restaurada com sucesso. O Claude da VM já estava em auto mode e o Dio pediu para consultar Jira e fila de Prod por lá. Falta confirmar `uip login status` na VM (sem isso a consulta de Prod falha) e o resto da lista (MCPs, TI share, Chrome).
+- NÃO CONFIRMADO pelo Dio (superado se o passo foi feito) (passei os comandos, ele não reportou): `pip install pillow boto3` e `git config --global user.name/email` — checar com `python -m pip list` e `git config --global --list`.
 - PENDENTE, nesta ordem: (1) `python -m pip install pillow boto3` (confirmar); (2) git identity (confirmar); (3) `git -C C:\Projects\hub pull` após o push da VDI; (4) copiar `hub\CLAUDE.md` para `~/.claude/CLAUDE.md`; (5) `hub\03-ferramentas\scripts\restore-memory.ps1 -ProjectPath C:\Projects\biztech-uipath-rpa`; (6) `claude` com login SSO dentro do repo; (7) `uip` (instalar/login, conferir org gustoinc e tenant); (8) rodar `benops-rpa-setup`; (9) reautenticar MCPs em `/mcp`; (10) pedir à TI o share `\\fs3-prd-aws.gustocorp.com\BizTech` (Locks/creds); (11) liberar pop-ups no Chrome e instalar extensão UiPath como Current User; (12) teste final: perguntar ao Claude da VM sobre BT-77065.
 
 **Why:** a VDI Porto vai sumir (incluindo U:), então o histórico e as regras precisam estar fora dela.
