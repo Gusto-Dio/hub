@@ -1,0 +1,18 @@
+---
+name: feedback_connectionclient_assembly_load_needs_explicit_pin
+description: "Could not load file or assembly 'ConnectionClient, Version=2.0.15.0...'" from Gusto_Benefits.AWS.GetS3Census — no dependency in the graph declares a floor high enough; fix is an explicit direct pin ("UiPath.ConnectionClient": "2.0.15") in the consuming project's project.json. RECURRING — hit on 2+ unrelated processes, same exact version every time.
+metadata:
+  type: feedback
+  originSessionId: fc2006b8-97b4-4993-82c5-23e7ef1bc824
+  modified: 2026-09-12T01:35:01.692Z
+---
+
+Studio threw `Could not load file or assembly 'ConnectionClient, Version=2.0.15.0, Culture=neutral, PublicKeyToken=null'` from `Gusto_Benefits.AWS.GetS3Census.GetImplementation()` when opening `Kaiser_GroupSubmissions_NewPlan` (BT-75495), even right after a clean `git status` (no uncommitted dependency drift — ruled out [[feedback_assembly_load_error_check_worktree_diff]]'s usual cause) and after clearing the project's local Studio package cache (`.local/AllDependencies.json`, `.local/PackageCache.json`, `.local/nuget.cache` — see the "Studio caches its own dependency resolution" pattern in CLAUDE.md).
+
+**Root cause:** none of `Gusto_Benefits`' own declared dependencies (`UiPath.AmazonWebServices.Activities` etc.) request a floor higher than `UiPath.ConnectionClient` 2.0.7 — confirmed by grepping every dependency's `.nuspec` in the local NuGet cache. NuGet correctly resolves to 2.0.7 for the consuming project. But the *published* `Gusto_Benefits` binary was built against `UiPath.ConnectionClient` 2.0.15.0 (some other package in the library's own build-time graph pulled it higher than what the nuspec floors declare), and that exact version is hard-baked into the compiled assembly's binary reference. A restore that satisfies the nuspec floors is NOT the same as satisfying what the DLL actually needs at runtime.
+
+**Fix:** add an explicit direct dependency in the consuming project's `project.json` — `"UiPath.ConnectionClient": "2.0.15"` — to force NuGet's resolved version up to what the library binary actually requires. Confirmed the exact version needed by checking which version was already present in the local NuGet cache (`~/.nuget/packages/uipath.connectionclient/`) and cross-referencing the error message's requested version number.
+
+**How to apply:** when a "Could not load file or assembly" error names a specific version that's higher than any declared dependency floor in the graph, don't assume cache corruption or an uncommitted bump first — grep the relevant `.nuspec` files in `~/.nuget/packages/<dependency>/<version>/` for the package that pulls in the failing assembly, compare the highest declared floor against the exact version in the error message. If the error's version is higher than every declared floor, the fix is a direct explicit pin on the consuming project, not a restore/cache fix.
+
+**Recurrence (BT-75657, 2026-09-12):** identical error (`ConnectionClient, Version=2.0.15.0...`, same stack trace via `Gusto_Benefits.AWS.GetS3Census.GetImplementation()`) hit `BSCA_GroupSubmissions_MemberLevel` when opening in Studio after bumping `Gusto_Benefits` to 1.559.26 — unrelated to that ticket's actual fix, just any process that transitively touches `GetS3Census` and doesn't already pin `UiPath.ConnectionClient`. Same fix applied (`"UiPath.ConnectionClient": "2.0.15"` added to the process's own `project.json`), confirmed via `uip rpa build --skip-analyze`. **Any process using `Gusto_Benefits` that hits this should get the same pin** — worth checking proactively (grep other BSCA/carrier processes' `project.json` for a missing `UiPath.ConnectionClient` entry) rather than waiting for each one to fail individually in Studio.
