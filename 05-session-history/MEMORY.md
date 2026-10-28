@@ -3,6 +3,10 @@
 - [BT-77070 Beam NHE: Beam redesenhou dropdowns (div combobox)](project_bt77070_beam_nhe_redesigned_dropdowns.md) — TICKET FECHADO ✅ (27/10); PR #3591 merged, Prod em 1.6.10, 3 itens requeued
 - [BT-77065 BSCA NHE "Plan Selections" timeout 7s→60s](project_bt77065_bsca_nhe_plan_selections_chrome_prompt.md) — FIX NO AR (27/10): lib 1.559.45 + processo 7.0.14 rebindado em Prod; falta monitorar rodadas (logs de horário) + regras do lock/Buildkite
 
+- [BT-77083 FloridaBlue NHE "EE already exists" falso](project_bt77083_floridablue_nhe_false_ee_exists.md) — NO AR (28/10): PRs #3685+#3689 mergeadas, Process rebindado em Prod pra 6.0.11, Jira comentado; falta monitorar 1º enrollment novo (PDF vs Error.png no bucket)
+- [Check "bots só Gusto_*" + Windows (desde 28/10)](feedback_bots_only_gusto_dependencies_check_since_28oct.md) — PR passa no CI mas o build do develop pode falhar (script novo); remover dep direta se vem transitiva da lib
+- [Versão do Process em Prod pode estar atrás do feed](feedback_process_version_can_lag_behind_feed.md) — checar `uip or processes list` (ProcessVersion), avisar delta no rebind; troca de tenant e volta pra Staging
+
 - [dependencylock estrito, sem skip (desde 27/10/2026)](feedback_dependencylock_strict_no_skip_since_oct_2026.md) — todo projeto alterado = lock exato; PR de lib alinha deps + bumpa lock; deploy Prod flaky 0x80131509 → Retry
 
 - [BT-76508 QueueBuilder: tracker 1/1/2027 trava na API do Google](project_bt76508_queuebuilder_tracker_1_1_2027_api_hang.md) — EM ANDAMENTO (08/10); só o tracker 1/1/2027 não…
@@ -119,3 +123,4 @@
 - [BT-76973 BCBS_MA pop-up bloqueado fecha o Chrome](project_bt76973_bcbs_ma_popup_blocked_chrome_closed.md) — causa: Close Tab incondicional em NavigateToHome; Dio liberou pop-up, filas zeradas (22/10 01:50 UTC), Jira comentado; falta rodada 06:00 + política/lib
 - [uip queue-items: sem retry, delete exige --yes](reference_uip_queue_items_cli_gotchas.md) — recolocar item com SpecificData bruto; auto mode bloqueia delete em Prod (Dio roda via !)
 - [Migração VDI → VM AWS + hub (27/10)](project_vm_migration_hub_2026_10.md) — memória restaurada e verificada na VM (BT-77065 ok); falta confirmar uip login, MCPs, TI share (Z:), Chrome
+- [BT-77083 FloridaBlue NHE "EE already exists" falso](project_bt77083_floridablue_nhe_false_ee_exists.md) — causa provada (TypeInto pós-Submit); plano só-lógica aguardando OK, sem código ainda

@@ -1,29 +1,32 @@
-# Requirements do ambiente
+# Environment requirements
 
-Versões da VDI atual (27/10/2026). O comando `benops-rpa-setup` (em `03-ferramentas/claude-commands`) faz o health check; use-o junto.
+Versions as of the AWS VM setup (2026-10-28). The `benops-rpa-setup` command (in `03-tools/claude-commands`) runs the health check; use it together with this file.
 
-| Item | Versão |
+| Item | Version |
 |---|---|
 | Windows | Server 2025 Datacenter 10.0.26100 |
-| .NET SDK | 8.0.422 (Helm pode exigir .NET 10 → usar uipcli) |
-| Python | 3.14.6 em `C:\Python314\python.exe` (+ `pip-freeze.txt`: Pillow 12.2.0, boto3) |
-| Node.js | 24.17.0 |
-| Git | 2.54.0 (configurar identidade: `Diogenes Ribeiro` / diogenes.ribeiro@gusto.com) |
-| UiPath CLI `uip` | 1.204.0 (`npm i -g @uipath/cli` ou conforme benops-rpa-setup) |
-| Plugin Claude | `uipath@uipath-marketplace` 1.204.1 |
-| Excel | instalado (necessário para activities de Excel) |
-| UiPath Studio + extensão Chrome | extensão instalada como **Current User** |
-| PowerShell | 5.1 (pwsh opcional) |
+| .NET SDK | 8.0.x (Helm may require .NET 10, then use uipcli) |
+| Python | 3.14.x (`winget install --id Python.Python.3.14 --source winget`, needs Administrator; see `pip-freeze.txt`: Pillow, boto3) |
+| Node.js | 24.x |
+| Git | 2.54.x (identity: `Diogenes Ribeiro` / diogenes.ribeiro@gusto.com) |
+| UiPath CLI `uip` | 1.204.x (`npm i -g @uipath/cli`, then the tools orchestrator, rpa, rpa-legacy, admin, docsai) |
+| Claude plugin | `uipath@uipath-marketplace` (install the skills with `uip skills install`) |
+| Excel | needed for Excel activities |
+| UiPath Studio + Chrome extension | extension installed as **Current User** (not All Users) |
+| PowerShell | 5.1 (pwsh optional) |
 
-## Passos
-1. Instalar ferramentas acima (winget/npm/pip; ver benops-rpa-setup).
-2. `git config --global user.name "Diogenes Ribeiro"` e `user.email diogenes.ribeiro@gusto.com`.
-3. Clonar `Gusto/biztech-uipath-rpa`; confirmar `develop`.
-4. Mapear drives (`network-drives.md`).
-5. `uip login`, `uip login status`.
-6. Copiar `CLAUDE.md` → `~/.claude/CLAUDE.md`; rodar `restore-memory.ps1`.
-7. Instalar plugins/MCPs (benops-rpa-setup) e reautenticar conectores em `/mcp`.
-8. Chrome: permitir pop-ups dos carriers quando necessário (ver BT-76973).
+User PATH must include Python, its `Scripts` folder and `%APPDATA%\npm`. Read it with `[Environment]::GetEnvironmentVariable("Path","User")`, never `$env:Path`.
 
-## Settings do Claude
-`settings.json` atual habilita `uipath@uipath-marketplace` (marketplace local `~/.uipath/.skills`), `tui: fullscreen`, tema `dark-ansi` e um bloco `autoMode` específico deste repo. Recriar com `/config` e `/install-permissions` em vez de copiar.
+## Steps
+1. Install the tools above (winget/npm/pip; see benops-rpa-setup).
+2. `git config --global user.name "Diogenes Ribeiro"` and `git config --global user.email diogenes.ribeiro@gusto.com`.
+3. Clone `Gusto/biztech-uipath-rpa` to `C:\Projects\biztech-uipath-rpa`; confirm `develop`.
+4. Map the network drive (`network-drives.md`).
+5. `uip login` then `uip login status` (org `gustoinc`; default tenant Staging).
+6. Copy `CLAUDE.md` to `~/.claude/CLAUDE.md`; run `restore-memory.ps1 -ProjectPath C:\Projects\biztech-uipath-rpa`.
+7. Install plugins/MCPs (benops-rpa-setup) and authenticate the connectors again in `/mcp`.
+8. Chrome: allow the carriers' pop-ups (see BT-76973) and install the UiPath extension as Current User.
+9. `jq` is not available on the VM; validate JSON with Python. For packing see `reference_pack_with_uipcli_when_helm_needs_dotnet10`.
+
+## Claude settings
+The current `settings.json` enables `uipath@uipath-marketplace` (local marketplace `~/.uipath/.skills`), `tui: fullscreen`, theme `dark-ansi` and an `autoMode` block specific to this repo. Recreate it with `/config` and `/install-permissions` instead of copying.

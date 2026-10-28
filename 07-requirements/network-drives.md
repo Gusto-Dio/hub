@@ -1,8 +1,11 @@
-# Drives de rede (VDI antiga)
+# Network drives
 
-| Letra | Destino | Uso |
+| Letter | Target | Use |
 |---|---|---|
-| U: | `\gustocloud.apporto\dfs\GSTO\Users\<user>\Documents` | Documents/Projects da VDI Porto (some com a VDI) |
-| Z: | `\fs3-prd-aws.gustocorp.com\BizTech` | share BizTech: credenciais dos robôs, Locks/.breaker.json |
+| U: (AWS VM, current) | `\\fs3-prd-aws.gustocorp.com\BizTech` | BizTech share: robot credentials, Locks/.breaker.json. Mapped by Dio on 2026-10-28 (the choice of `U:` instead of `Z:` was deliberate) |
+| U: (old Porto VDI, gone) | `\\gustocloud.apporto\dfs\GSTO\Users\<user>\Documents` | personal Documents/Projects of the old VDI |
+| Z: (old Porto VDI, gone) | `\\fs3-prd-aws.gustocorp.com\BizTech` | same BizTech share, old letter |
 
-Na VM AWS: verificar com a TI o acesso ao share BizTech e a letra equivalente. Os caminhos dos Locks/creds usados pelos processos estão nos projetos e em `reference_login_circuit_breaker_locks_share`. Memórias com caminho `U:\Projects\...` são históricas.
+Mapping command: `net use U: \\fs3-prd-aws.gustocorp.com\BizTech /persistent:yes`. Errors: `5` = access denied (ask IT for access), `53` = path not found (network).
+
+Lock/credential paths used by the processes are in the projects and in `reference_login_circuit_breaker_locks_share`. Memories that mention `U:\Projects\...` or `Z:` are historical; if a script fails to find Locks or credentials, check whether it assumes the old letter.

@@ -1,22 +1,23 @@
 # hub
 
-Base de conhecimento portável do Dio para trabalhar com Claude Code. Pensado para trocar de VDI/VM sem recomeçar do zero.
+Portable knowledge base for Dio to work with Claude Code. Built to switch VDI/VM without starting from scratch.
 
-| Pasta | Conteúdo |
+| Folder | Content |
 |---|---|
-| 01-credenciais | onde estão e como recuperar credenciais (sem valores) |
-| 02-plataformas | UiPath, Buildkite, GitHub, Jira, Slack, carriers |
-| 03-ferramentas | comandos Claude, scripts, ferramentas do repo |
-| 04-historicos-processo | histórico por ticket/processo |
-| 05-historicos-sessao | work_state e índice de memória |
-| 06-aprendizados | regras, armadilhas, referências |
-| 07-requirements | versões e instalação do ambiente |
+| 01-credentials | where credentials live and how to recover them (no values) |
+| 02-platforms | UiPath, Buildkite, GitHub, Jira, Slack, carriers |
+| 03-tools | Claude commands, scripts, repo tools |
+| 04-process-history | history per ticket/process |
+| 05-session-history | work_state and the memory index |
+| 06-learnings | rules, pitfalls, references |
+| 07-requirements | versions, network drives and environment setup |
 
-## Como usar na VM nova
-1. `git clone` deste repo (a URL fica no destino que o Dio escolher).
-2. Instale o Claude Code e abra `claude` dentro da pasta clonada.
-3. Diga: "Leia CLAUDE.md e 07-requirements/README.md, instale o que falta e depois restaure a memória."
-4. Copie `CLAUDE.md` para `~/.claude/CLAUDE.md`.
+## How to use it on a new machine
+1. `git clone` this repo (private: `Gusto-Dio/hub`; SSO login opens in the browser).
+2. Install Claude Code and open `claude` inside the cloned folder.
+3. Say: "Read CLAUDE.md and 07-requirements/README.md, install what is missing and then restore the memory."
+4. Copy `CLAUDE.md` to `~/.claude/CLAUDE.md`.
+5. After later changes: `git -C C:\Projects\hub pull`, then run `03-tools/scripts/restore-memory.ps1` again.
 
-## Regra de ouro
-Nada de segredo aqui. Senhas, tokens, `.credentials.json`, `~/.uipath/.auth` e `.env` nunca entram neste repo. Veja `01-credenciais`.
+## Golden rule
+No secrets here. Passwords, tokens, `.credentials.json`, `~/.uipath/.auth` and `.env` never enter this repo. See `01-credentials`.
