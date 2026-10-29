@@ -1,5 +1,11 @@
 # Work State
 
+## VM setup (2026-10-29)
+- `verify-environment.ps1` on the VM: 20 PASS, 3 WARN, 1 FAIL before the hook. The FAIL (hook `uipath-edit-guard`) was fixed the same session; re-run the check next session to confirm PASS.
+- Hook installed in `~/.claude/settings.json`, not yet seen working in a real session (first `.xaml` edit of the next session is the test). See `03-tools/hooks.md`.
+- PENDING: Chrome UiPath extension (confirm Current User install), MCP connectors (`/mcp`: GitHub, Jira, Slack, Notion, Buildkite, Gmail, Sheets), request to IT for the BizTech share, Processes DB sync (benops-sync steps 1-4), `Gusto_Benefits_CoveredCalifornia` 1.0.3 vs Production 1.0.2, verify BT-77083 deploy in Production, `uip` token expired at 2026-10-29T03:54Z (login status passed at last check).
+- The hub has local commits not pushed; push needs Dio's explicit approval (`!`).
+
 ## Open PRs
 
 ### BT-75581 — UHC_SAMX_NewHireEnrollment_Modern — Proof of Reason + systemic selector bug — EM ANDAMENTO, sem PR ainda
