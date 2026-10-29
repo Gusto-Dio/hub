@@ -17,6 +17,9 @@ Versions as of the AWS VM setup (2026-10-28). The `benops-rpa-setup` command (in
 
 User PATH must include Python, its `Scripts` folder and `%APPDATA%\npm`. Read it with `[Environment]::GetEnvironmentVariable("Path","User")`, never `$env:Path`.
 
+## Install guide
+The step-by-step guide for a new machine is in `install/`: `README.md` (how to run it), `inventory.md` (what to install, in order), `claude-setup.md`, `manual-steps.md` and `verify-environment.ps1` (read-only check with PASS/WARN/FAIL). The short list below is the overview.
+
 ## Steps
 1. Install the tools above (winget/npm/pip; see benops-rpa-setup).
 2. `git config --global user.name "Diogenes Ribeiro"` and `git config --global user.email diogenes.ribeiro@gusto.com`.

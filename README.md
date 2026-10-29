@@ -4,13 +4,14 @@ Portable knowledge base for Dio to work with Claude Code. Built to switch VDI/VM
 
 | Folder | Content |
 |---|---|
+| 00-rules | rules and checklists Claude must read BEFORE acting (security, git/PR, XAML protocol, CI, Production, session protocol) |
 | 01-credentials | where credentials live and how to recover them (no values) |
 | 02-platforms | UiPath, Buildkite, GitHub, Jira, Slack, carriers |
 | 03-tools | Claude commands, scripts, repo tools |
 | 04-process-history | history per ticket/process |
-| 05-session-history | work_state and the memory index |
+| 05-session-history | work_state, memory index and `sessions/` (one note per session, chronological) |
 | 06-learnings | rules, pitfalls, references |
-| 07-requirements | versions, network drives and environment setup |
+| 07-requirements | versions, network drives and environment setup; `install/` has the new-machine guide and the verify script |
 
 ## How to use it on a new machine
 1. `git clone` this repo (private: `Gusto-Dio/hub`; SSO login opens in the browser).
