@@ -1,5 +1,8 @@
 # Memory Index
 
+- [BBO-3937 SLO alerting / Quality Layer](project_bbo3937_slo_alerting_quality_layer.md) — retomar 30/10: Feature 1 (SLO rules + Slack routing) nos 3 bots piloto; branch piloto defasada, sem PR
+- [Colar falha na VM → ler clipboard](feedback_read_clipboard_when_paste_fails.md) — "tá no clipboard" = rodar Get-Clipboard direto, sem pedir de novo
+
 - [BT-77070 Beam NHE: Beam redesenhou dropdowns (div combobox)](project_bt77070_beam_nhe_redesigned_dropdowns.md) — TICKET FECHADO ✅ (27/10); PR #3591 merged, Prod em 1.6.10, 3 itens requeued
 - [BT-77065 BSCA NHE "Plan Selections" timeout 7s→60s](project_bt77065_bsca_nhe_plan_selections_chrome_prompt.md) — FIX NO AR (27/10): lib 1.559.45 + processo 7.0.14 rebindado em Prod; falta monitorar rodadas (logs de horário) + regras do lock/Buildkite
 

@@ -6,6 +6,11 @@
 - PENDING: Chrome UiPath extension (confirm Current User install), MCP connectors (`/mcp`: GitHub, Jira, Slack, Notion, Buildkite, Gmail, Sheets), request to IT for the BizTech share, Processes DB sync (benops-sync steps 1-4), `Gusto_Benefits_CoveredCalifornia` 1.0.3 vs Production 1.0.2, verify BT-77083 deploy in Production, `uip` token expired at 2026-10-29T03:54Z (login status passed at last check).
 - The hub has local commits not pushed; push needs Dio's explicit approval (`!`).
 
+## Next session (2026-10-30 early): BBO-3937 SLO Quality Layer
+- Dio wants to start implementing Feature 1 (SLO Rules and Slack Routing) on the 3 pilot bots. Plan, stories and open points: [[project_bbo3937_slo_alerting_quality_layer]].
+- First step: new branch off `origin/develop` (pilot branch `bbo-3937-slo-packet-collection-pilot` is behind develop and has no throughput rule), `slo_validate.sh`, story 1. Any Production read needs Dio's explicit approval.
+- Dio's paste does not work on the VM: when he says "clipboard", run `Get-Clipboard -Raw`.
+
 ## Open PRs
 
 ### BT-75581 — UHC_SAMX_NewHireEnrollment_Modern — Proof of Reason + systemic selector bug — EM ANDAMENTO, sem PR ainda
