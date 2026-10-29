@@ -12,7 +12,7 @@ Do this after inventory items 1 to 10 and 16 to 17 (Claude installed, repo and h
    - `hooks`: the XAML guard (step 5)
    - `autoMode`: recreate with `/config` and `/install-permissions`. The old block pointed at `U:\Projects\biztech-uipath-rpa` as the trusted repo; on the VM the repo is `C:\Projects\biztech-uipath-rpa`, so update the trusted repo line to the new path.
    Edit JSON with a script (Python or `ConvertFrom-Json`), keep a backup copy first, and verify the other keys are unchanged afterwards.
-5. **Hook (XAML protocol).** Merge into `settings.json` under `hooks` (script path = this machine's hub):
+5. **Hook (XAML protocol).** Merge into `settings.json` under `hooks` (the script path must be on a LOCAL drive because of the `RemoteSigned` machine policy: `C:\Projects\hub` is fine, a network drive is not, so copy the script to `~/.claude/hooks/` in that case; never use `-ExecutionPolicy Bypass`):
    ```json
    "hooks": {
      "PostToolUse": [ { "matcher": "Skill", "hooks": [ { "type": "command",
