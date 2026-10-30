@@ -1,6 +1,6 @@
 # Memory Index
 
-- [BT-77264 BSCA NHE "Active CA not available" (30/10)](project_bt77264_bsca_nhe_active_class_not_available.md) — EM ANDAMENTO: fix do processo aplicado e testado em Staging, NÃO commitado (clone principal, branch BT-77264-...); 2º bloqueio na lib EmployeeCoverage no mesmo ticket (PR da lib separado); Jira comentado; retomar: commit limpo, lib, testar ponta a ponta
+- [BT-77264 BSCA NHE "Active CA not available" (30/10)](project_bt77264_bsca_nhe_active_class_not_available.md) — EM ANDAMENTO: fix do processo testado em Staging e COMMITADO local 4364577d3 (v7.0.17, sem push/PR, branch BT-77264-...); 2º bloqueio na lib EmployeeCoverage no mesmo ticket (PR da lib separado); Jira comentado; retomar: commit limpo, lib, testar ponta a ponta
 - [Sem worktree: ficar no repo original](feedback_no_worktree_stay_in_original_repo.md) — commitar local na outra branch antes…
 - [Teste validou a lógica → aplicar, sem medições laterais](feedback_apply_working_fix_no_side_measurements.md) — e confirmar escopo ambíguo ("não vamos corrigir tudo") antes de agir
 
