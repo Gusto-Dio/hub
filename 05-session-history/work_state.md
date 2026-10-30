@@ -2,10 +2,10 @@
 
 ## BT-77264 BSCA_NewHireEnrollment "Active CA not available" — EM ANDAMENTO (2026-10-30)
 - Detalhes: [[project_bt77264_bsca_nhe_active_class_not_available]]. Contexto: BT-77065 reaberto por Tammy, Oscar corrigiu a falha de inicialização no PR #3700 (Prod em 7.0.16).
-- Clone principal `C:\Projects\biztech-uipath-rpa` está na branch `BT-77264-bsca-nhe-active-class-not-available` com o fix do Active CA COMMITADO LOCAL (`4364577d3`, v7.0.17, sem push/PR) em `ProcessLayer/EnterEmployeeInformation.xaml` (espera limitada de 20 s; ruído do Studio já removido), e o arquivo temporário `ZZ_Temp_InspectClassDropdown.xaml` (não rastreado, apagar). Sem worktree (foi removido).
+- Clone principal `C:\Projects\biztech-uipath-rpa` está na branch `BT-77264-bsca-nhe-active-class-not-available` com o fix do Active CA COMMITADO LOCAL (`4364577d3`, v7.0.17, sem push/PR) em `ProcessLayer/EnterEmployeeInformation.xaml` (espera limitada de 20 s; ruído do Studio já removido), arquivo temporário já apagado, `git status` limpo. Sem worktree (foi removido).
 - 2º bloqueio (mesmo ticket, PR de lib separado, mergeia antes): `Libraries/Gusto_Benefits/BSCA/NHE/EmployeeCoverage.xaml`, buscas de 3 s, "Current year enrollment not exists"; provável falso negativo.
 - Jira BT-77264 comentado (id 5152111), status não alterado. Fila Staging `BSCA_NewHireEnrollment` só com os 8 itens de teste (1 já usado, BiVqxIAF).
-- PENDENTE (ordem): apagar o arquivo temporário -> ler `.buildkite/check_dependency.sh` de origin/develop -> branch da lib + fix + bump + lock -> teste de ponta a ponta no Staging (publicar lib no feed Staging pede aprovação) -> itens UnexpectedPage -> PRs -> merge, rebind em Prod com aprovação, confirmar rodada boa antes de dizer "resolvido".
+- PENDENTE (ordem): ler `.buildkite/check_dependency.sh` de origin/develop -> branch da lib + fix + bump + lock -> teste de ponta a ponta no Staging (publicar lib no feed Staging pede aprovação) -> itens UnexpectedPage -> PRs -> merge, rebind em Prod com aprovação, confirmar rodada boa antes de dizer "resolvido".
 - BBO-3937: 3 slo.yaml piloto commitados LOCAL (`9860063e0`, branch `BBO-3937-slo-feature1-rules-and-slack-routing`), sem push/PR.
 
 ## VM setup (2026-10-29)
