@@ -4,7 +4,7 @@ description: BBO-3937 Quality Layer SLO Finetuning — Feature 1 (SLO Rules and 
 metadata:
   type: project
   originSessionId: 5e203aa4-1bd1-4ff8-ad47-6036ad823343
-  modified: 2026-10-29T03:22:45.056Z
+  modified: 2026-10-30T02:45:49.802Z
 ---
 
 BBO-3937 (Story, P2, In Progress, reporter Sri, epic BBO-3735 "Quality SLO Layer for the RPA Bots"). Doc mestre no Notion: "Quality Layer SLO Finetuning" (https://app.notion.com/p/3f4ad673c6c281a897adf0c85fade1ec), com 3 sub-páginas. Revisado por Oscar (aprovou o design em 14/10) e Thomas (reunião 22/10, definiu a Feature 1 como a primeira a construir).
@@ -21,6 +21,8 @@ BBO-3937 (Story, P2, In Progress, reporter Sri, epic BBO-3735 "Quality SLO Layer
 7. Apagar/consertar 91 monitores mortos. 8. Restante da frota.
 
 **Estado do código:** branch `origin/bbo-3937-slo-packet-collection-pilot` (commits de 24-30/09: fine-tune das 3 métricas com baseline de 91 dias, regra `business_error_count` no catalog, `owner_group` só no Anthem, `owner-map.yaml`). Sem PR. NÃO tem `throughput` nem estimativa de alertas/mês. Está defasada do develop (develop ganhou validação de janela 48h #3444/#3445 e SLOs ADM #3157/#3158; diff do catalog.yaml mostra -197 linhas por defasagem). Commits de 30/09 (business_error_count) vieram antes da story 3, reavaliar.
+
+**Progresso (30/10):** os 3 `slo.yaml` piloto (Anthem, BCBS_IL, BCBSMAPacketCollection) tiveram `error_rate`/`error_count`/`execution_time` ajustados com baseline de Production (contagens agregadas, janela da fila 04/09-28/10, jobs de 28/09 ou 91 dias; `throughput` e `staleness` NÃO tocados; BCBS_MA execution_time critical 14400->32400 marcado "PENDING CONFIRMATION" pelo dono do processo). Isso estava na branch `BBO-3937-slo-feature1-rules-and-slack-routing` (off develop) e foi COMMITADO LOCALMENTE em 30/10 como `9860063e0` ("[BBO-3937] Packet Collection SLO pilots: fine-tune ..."), SEM push e SEM PR. Falta: throughput + estimativa de alertas/mês, `slo_validate.sh`, owner_group, PR. Antes de voltar para a BBO-3937, o clone principal está na branch do BT-77264 (ver [[project_bt77264_bsca_nhe_active_class_not_available]]).
 
 **Why:** Sri quer alertas na hora certa com aprovação certa antes de criar ticket; Thomas priorizou Slack antes de ticket.
 **How to apply:** próxima sessão (30/10 cedo, Dio pediu): criar/atualizar branch off `origin/develop` (nunca develop), validar com `.buildkite/slo_validate.sh`, começar pela story 1. Medir `throughput`/alertas por mês exige leitura em Production: pedir aprovação explícita (`uip login status` primeiro, voltar pra Staging). slo.yaml não passa por deploy/projectVersion (ver [[project_bbo3747_bsca_groupsubmissions_slo]]). Pontos em aberto: nomes de canal no owner-map (time confirma), aprovação de regra vs "right approvals" do ticket (Dio confirma com Sri), PSVULN-6030 (bots reportam exceção como Successful), PSVULN-2063 (CI validar owner_group). Ata da reunião: Google Doc "Diógenes / Thomas - 2026/10/22" (Gemini notes). Também no ata: Dio deve dividir o doc em features (feito, página v2 de 26/10), fazer walk-through com Thomas e postar a atualização no canal dev.
